@@ -961,3 +961,43 @@ color:#8fb5ff;
 margin-top:10px;
 margin-bottom:20px;
 }
+
+/* ==========================
+   GLOBAL SEARCH
+========================== */
+
+.search-section{
+margin-bottom:30px;
+}
+
+#globalSearch{
+width:100%;
+padding:15px;
+border-radius:12px;
+border:none;
+background:#141b34;
+color:white;
+font-size:1rem;
+}
+
+#searchResults{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.search-result{
+background:#141b34;
+padding:15px;
+border-radius:12px;
+border-left:4px solid #4f8cff;
+}
+
+.search-result h4{
+margin-bottom:5px;
+}
+
+.search-result p{
+color:#c7d0e4;
+}
