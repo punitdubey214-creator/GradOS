@@ -80,9 +80,164 @@ Export Backup
 
 </button>
 
+<input
+type="file"
+id="importFile"
+accept=".json"
+style="display:none;">
+
+<button
+id="importBtn"
+class="btn-secondary">
+
+Import Backup
+
+</button>
+
 </div>
 
 </div>
+
+document
+.getElementById("importBtn")
+.addEventListener(
+"click",
+()=>{
+
+document
+.getElementById("importFile")
+.click();
+
+});
+document
+.getElementById("importFile")
+.addEventListener(
+"change",
+(event)=>{
+
+const file =
+event.target.files[0];
+
+if(!file) return;
+
+const reader =
+new FileReader();
+
+reader.onload =
+function(e){
+
+try{
+
+const backup =
+JSON.parse(
+e.target.result
+);
+
+/* -------------------
+USER
+------------------- */
+
+if(backup.userName){
+
+localStorage.setItem(
+"userName",
+backup.userName
+);
+
+}
+
+if(backup.userEmail){
+
+localStorage.setItem(
+"userEmail",
+backup.userEmail
+);
+
+}
+
+/* -------------------
+APPLICATIONS
+------------------- */
+
+if(backup.applications){
+
+localStorage.setItem(
+"applications",
+JSON.stringify(
+backup.applications
+)
+);
+
+}
+
+/* -------------------
+PROFESSORS
+------------------- */
+
+if(backup.professors){
+
+localStorage.setItem(
+"professors",
+JSON.stringify(
+backup.professors
+)
+);
+
+}
+
+/* -------------------
+REFEREES
+------------------- */
+
+if(backup.referees){
+
+localStorage.setItem(
+"referees",
+JSON.stringify(
+backup.referees
+)
+);
+
+}
+
+/* -------------------
+NOTES
+------------------- */
+
+if(backup.notes){
+
+localStorage.setItem(
+"notes",
+JSON.stringify(
+backup.notes
+)
+);
+
+}
+
+alert(
+"Backup Imported Successfully!"
+);
+
+location.reload();
+
+}
+
+catch(error){
+
+alert(
+"Invalid Backup File!"
+);
+
+}
+
+};
+
+reader.readAsText(
+file
+);
+
+});
 
 <script>
 
