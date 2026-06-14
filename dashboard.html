@@ -172,7 +172,205 @@ document.getElementById(
 userEmail;
 
 }
+/* ==========================
+   GLOBAL SEARCH
+========================== */
 
+const searchInput =
+document.getElementById(
+"globalSearch"
+);
+
+const searchResults =
+document.getElementById(
+"searchResults"
+);
+
+searchInput.addEventListener(
+"input",
+performSearch
+);
+
+function performSearch(){
+
+const query =
+searchInput.value
+.toLowerCase()
+.trim();
+
+if(query === ""){
+
+searchResults.innerHTML = "";
+return;
+
+}
+
+let results = [];
+
+/* ------------------
+Applications
+------------------ */
+
+const applications =
+JSON.parse(
+localStorage.getItem(
+"applications"
+)
+) || [];
+
+applications.forEach(app=>{
+
+const text =
+JSON.stringify(app)
+.toLowerCase();
+
+if(text.includes(query)){
+
+results.push({
+
+type:"Application",
+
+title:
+app.university ||
+"Application"
+
+});
+
+}
+
+});
+
+/* ------------------
+Professors
+------------------ */
+
+const professors =
+JSON.parse(
+localStorage.getItem(
+"professors"
+)
+) || [];
+
+professors.forEach(prof=>{
+
+const text =
+JSON.stringify(prof)
+.toLowerCase();
+
+if(text.includes(query)){
+
+results.push({
+
+type:"Professor",
+
+title:
+prof.name
+
+});
+
+}
+
+});
+
+/* ------------------
+Referees
+------------------ */
+
+const referees =
+JSON.parse(
+localStorage.getItem(
+"referees"
+)
+) || [];
+
+referees.forEach(ref=>{
+
+const text =
+JSON.stringify(ref)
+.toLowerCase();
+
+if(text.includes(query)){
+
+results.push({
+
+type:"Referee",
+
+title:
+ref.name
+
+});
+
+}
+
+});
+
+/* ------------------
+Notes
+------------------ */
+
+const notes =
+JSON.parse(
+localStorage.getItem(
+"notes"
+)
+) || [];
+
+notes.forEach(note=>{
+
+const text =
+JSON.stringify(note)
+.toLowerCase();
+
+if(text.includes(query)){
+
+results.push({
+
+type:"Note",
+
+title:
+note.title
+
+});
+
+}
+
+});
+
+/* ------------------
+Render
+------------------ */
+
+searchResults.innerHTML = "";
+
+if(results.length === 0){
+
+searchResults.innerHTML =
+
+`<div class="search-result">
+
+<h4>No Results</h4>
+
+</div>`;
+
+return;
+
+}
+
+results.forEach(item=>{
+
+searchResults.innerHTML +=
+
+`<div class="search-result">
+
+<h4>${item.title}</h4>
+
+<p>${item.type}</p>
+
+</div>`;
+
+});
+
+}
 </script>
 
 </body>
