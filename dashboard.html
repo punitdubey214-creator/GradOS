@@ -239,7 +239,9 @@ type:"Application",
 
 title:
 app.university ||
-"Application"
+"Application",
+
+link:"applications.html"
 
 });
 
@@ -271,7 +273,9 @@ results.push({
 type:"Professor",
 
 title:
-prof.name
+prof.name,
+
+link:"professors.html"
 
 });
 
@@ -303,7 +307,9 @@ results.push({
 type:"Referee",
 
 title:
-ref.name
+ref.name,
+
+link:"referees.html"
 
 });
 
@@ -335,7 +341,9 @@ results.push({
 type:"Note",
 
 title:
-note.title
+note.title || "Note",
+
+link:"notes.html"
 
 });
 
@@ -367,13 +375,14 @@ results.forEach(item=>{
 
 searchResults.innerHTML +=
 
-`<div class="search-result">
+`<a href="${item.link}"
+class="search-result">
 
 <h4>${item.title}</h4>
 
 <p>${item.type}</p>
 
-</div>`;
+</a>`;
 
 });
 
