@@ -32,10 +32,18 @@ Welcome Back
    
 <div class="search-section">
 
-<input id="globalSearch">
+<input
+type="text"
+id="globalSearch"
+placeholder="Search universities, professors, referees...">
+
 <button id="searchBtn">
 Search
 </button>
+
+<div id="searchResults"></div>
+
+</div>
    
 <div class="stats-grid">
 
@@ -183,8 +191,10 @@ document.getElementById(
 "searchResults"
 );
 
-searchInput.addEventListener(
-"input",
+document
+.getElementById("searchBtn")
+.addEventListener(
+"click",
 performSearch
 );
 
