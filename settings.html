@@ -98,22 +98,133 @@ Import Backup
 
 </div>
 
+<script>
+
+/* =====================
+   LOAD SETTINGS
+===================== */
+
+const nameInput =
+document.getElementById("settingsName");
+
+const emailInput =
+document.getElementById("settingsEmail");
+
+nameInput.value =
+localStorage.getItem("userName") || "";
+
+emailInput.value =
+localStorage.getItem("userEmail") || "";
+
+/* =====================
+   SAVE SETTINGS
+===================== */
+
+document
+.getElementById("saveSettingsBtn")
+.addEventListener("click", () => {
+
+localStorage.setItem(
+"userName",
+nameInput.value
+);
+
+localStorage.setItem(
+"userEmail",
+emailInput.value
+);
+
+alert("Settings Saved Successfully!");
+
+});
+
+/* =====================
+   EXPORT BACKUP
+===================== */
+
+document
+.getElementById("exportBtn")
+.addEventListener("click", () => {
+
+const backup = {
+
+userName:
+localStorage.getItem("userName"),
+
+userEmail:
+localStorage.getItem("userEmail"),
+
+applications:
+JSON.parse(
+localStorage.getItem("applications")
+) || [],
+
+professors:
+JSON.parse(
+localStorage.getItem("professors")
+) || [],
+
+referees:
+JSON.parse(
+localStorage.getItem("referees")
+) || [],
+
+notes:
+JSON.parse(
+localStorage.getItem("notes")
+) || []
+
+};
+
+const data =
+JSON.stringify(
+backup,
+null,
+2
+);
+
+const blob =
+new Blob(
+[data],
+{
+type:"application/json"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const a =
+document.createElement("a");
+
+a.href = url;
+
+a.download =
+"grados_backup.json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+});
+
+/* =====================
+   IMPORT BACKUP
+===================== */
+
 document
 .getElementById("importBtn")
-.addEventListener(
-"click",
-()=>{
+.addEventListener("click", () => {
 
 document
 .getElementById("importFile")
 .click();
 
 });
+
 document
 .getElementById("importFile")
-.addEventListener(
-"change",
-(event)=>{
+.addEventListener("change", (event) => {
 
 const file =
 event.target.files[0];
@@ -133,10 +244,6 @@ JSON.parse(
 e.target.result
 );
 
-/* -------------------
-USER
-------------------- */
-
 if(backup.userName){
 
 localStorage.setItem(
@@ -155,10 +262,6 @@ backup.userEmail
 
 }
 
-/* -------------------
-APPLICATIONS
-------------------- */
-
 if(backup.applications){
 
 localStorage.setItem(
@@ -169,10 +272,6 @@ backup.applications
 );
 
 }
-
-/* -------------------
-PROFESSORS
-------------------- */
 
 if(backup.professors){
 
@@ -185,10 +284,6 @@ backup.professors
 
 }
 
-/* -------------------
-REFEREES
-------------------- */
-
 if(backup.referees){
 
 localStorage.setItem(
@@ -199,10 +294,6 @@ backup.referees
 );
 
 }
-
-/* -------------------
-NOTES
-------------------- */
 
 if(backup.notes){
 
@@ -233,147 +324,7 @@ alert(
 
 };
 
-reader.readAsText(
-file
-);
-
-});
-
-<script>
-
-const nameInput =
-document.getElementById(
-"settingsName"
-);
-
-const emailInput =
-document.getElementById(
-"settingsEmail"
-);
-
-nameInput.value =
-localStorage.getItem(
-"userName"
-) || "";
-
-emailInput.value =
-localStorage.getItem(
-"userEmail"
-) || "";
-
-document
-.getElementById(
-"saveSettingsBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-localStorage.setItem(
-"userName",
-nameInput.value
-);
-
-localStorage.setItem(
-"userEmail",
-emailInput.value
-);
-
-alert(
-"Settings Saved Successfully!"
-);
-
-});
-/* =====================
-   EXPORT BACKUP
-===================== */
-
-document
-.getElementById(
-"exportBtn"
-)
-.addEventListener(
-"click",
-()=>{
-
-const backup = {
-
-userName:
-localStorage.getItem(
-"userName"
-),
-
-userEmail:
-localStorage.getItem(
-"userEmail"
-),
-
-applications:
-JSON.parse(
-localStorage.getItem(
-"applications"
-)
-) || [],
-
-professors:
-JSON.parse(
-localStorage.getItem(
-"professors"
-)
-) || [],
-
-referees:
-JSON.parse(
-localStorage.getItem(
-"referees"
-)
-) || [],
-
-notes:
-JSON.parse(
-localStorage.getItem(
-"notes"
-)
-) || []
-
-};
-
-const data =
-JSON.stringify(
-backup,
-null,
-2
-);
-
-const blob =
-new Blob(
-[data],
-{
-type:
-"application/json"
-}
-);
-
-const url =
-URL.createObjectURL(
-blob
-);
-
-const a =
-document.createElement(
-"a"
-);
-
-a.href = url;
-
-a.download =
-"grados_backup.json";
-
-a.click();
-
-URL.revokeObjectURL(
-url
-);
+reader.readAsText(file);
 
 });
 
