@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GradOS - Applications</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+GradOS
+</div>
+
+<div class="nav-buttons">
+
+<a href="dashboard.html" class="btn-secondary">
+Dashboard
+</a>
+
+</div>
+
+</nav>
+
+<div class="page-container">
+
+<div class="page-header">
+
+<div>
+
+<h1>Applications</h1>
+
+<p>
+Track every PhD application and required documents.
+</p>
+
+</div>
+
+<div style="display:flex; gap:10px;">
+
+<button id="addBtn" class="btn-primary">
++ Add Application
+</button>
+
+<button onclick="resetApplications()" class="btn-secondary">
+Clear All
+</button>
+
+</div>
+
+</div>
+
+<!-- FORM -->
+
+<div id="formContainer" class="app-form hidden">
+
+<input
+type="text"
+id="university"
+placeholder="University">
+
+<input
+type="text"
+id="program"
+placeholder="Program">
+
+<input
+type="date"
+id="deadline">
+
+<select id="status">
+
+<option>Researching</option>
+<option>Preparing</option>
+<option>Submitted</option>
+<option>Interview</option>
+<option>Accepted</option>
+<option>Rejected</option>
+
+</select>
+
+<h3 style="width:100%; margin-top:20px;">
+Requirements
+</h3>
+
+<!-- CV -->
+
+<label>CV</label>
+
+<select id="cv">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- SOP -->
+
+<label>SOP</label>
+
+<select id="sop">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- Cover Letter -->
+
+<label>Cover Letter</label>
+
+<select id="coverLetter">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- Motivation Letter -->
+
+<label>Motivation Letter</label>
+
+<select id="motivationLetter">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- Referees -->
+
+<label>Referees</label>
+
+<select id="referees">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- Application Form -->
+
+<label>Application Form</label>
+
+<select id="applicationForm">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- Transcript -->
+
+<label>Transcript</label>
+
+<select id="transcript">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<!-- English Test -->
+
+<label>English Test</label>
+
+<select id="englishTest">
+
+<option>Not Required</option>
+<option>Not Started</option>
+<option>Working On It</option>
+<option>Completed</option>
+
+</select>
+
+<button
+id="saveBtn"
+class="btn-primary"
+style="margin-top:20px;">
+Save Application
+</button>
+</div>
+
+<!-- APPLICATION CARDS -->
+
+<div
+id="applicationsContainer"
+class="applications-grid">
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

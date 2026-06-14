@@ -1,0 +1,272 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GradOS - Notes</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+GradOS
+</div>
+
+<div class="nav-buttons">
+<a href="dashboard.html" class="btn-secondary">
+Dashboard
+</a>
+</div>
+
+</nav>
+
+<div class="page-container">
+
+<div class="page-header">
+
+<div>
+<h1>Notebook</h1>
+<p>Store SOP ideas, university notes and research thoughts.</p>
+</div>
+
+<button id="addNoteBtn" class="btn-primary">
++ New Note
+</button>
+
+</div>
+
+<div id="noteForm" class="app-form hidden">
+
+<input
+type="text"
+id="noteTitle"
+placeholder="Note Title">
+
+<input
+type="text"
+id="noteUniversity"
+placeholder="University">
+
+<textarea
+id="noteContent"
+placeholder="Write your note..."
+rows="8">
+</textarea>
+
+<button
+id="saveNoteBtn"
+class="btn-primary">
+Save Note
+</button>
+
+</div>
+
+<div
+id="notesContainer"
+class="notes-grid">
+
+</div>
+
+</div>
+
+<script>
+
+const addNoteBtn =
+document.getElementById("addNoteBtn");
+
+const noteForm =
+document.getElementById("noteForm");
+
+const saveNoteBtn =
+document.getElementById("saveNoteBtn");
+
+const notesContainer =
+document.getElementById("notesContainer");
+
+let notes =
+JSON.parse(localStorage.getItem("notes")) || [];
+
+let editingNoteIndex = null;
+
+/* -------------------
+SHOW FORM
+------------------- */
+
+addNoteBtn.addEventListener("click",()=>{
+
+noteForm.classList.toggle("hidden");
+
+});
+
+/* -------------------
+EDIT NOTE
+------------------- */
+
+function editNote(index){
+
+const note = notes[index];
+
+document.getElementById("noteTitle").value =
+note.title;
+
+document.getElementById("noteUniversity").value =
+note.university;
+
+document.getElementById("noteContent").value =
+note.content;
+
+editingNoteIndex = index;
+
+saveNoteBtn.textContent =
+"Update Note";
+
+noteForm.classList.remove("hidden");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+/* -------------------
+DELETE NOTE
+------------------- */
+
+function deleteNote(index){
+
+if(confirm("Delete note?")){
+
+notes.splice(index,1);
+
+localStorage.setItem(
+"notes",
+JSON.stringify(notes)
+);
+
+renderNotes();
+
+}
+
+}
+
+/* -------------------
+RENDER NOTES
+------------------- */
+
+function renderNotes(){
+
+notesContainer.innerHTML = "";
+
+notes.forEach((note,index)=>{
+
+notesContainer.innerHTML += `
+
+<div class="note-card">
+
+<h3>${note.title}</h3>
+
+<span class="note-university">
+${note.university}
+</span>
+
+<p>
+${note.content}
+</p>
+
+<div style="margin-top:15px;display:flex;gap:10px;">
+
+<button
+onclick="editNote(${index})"
+class="btn-secondary">
+Edit
+</button>
+
+<button
+onclick="deleteNote(${index})"
+class="delete-btn">
+Delete
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* -------------------
+SAVE / UPDATE
+------------------- */
+
+saveNoteBtn.addEventListener("click",()=>{
+
+const note = {
+
+title:
+document.getElementById("noteTitle").value,
+
+university:
+document.getElementById("noteUniversity").value,
+
+content:
+document.getElementById("noteContent").value
+
+};
+
+if(editingNoteIndex !== null){
+
+notes[editingNoteIndex] = note;
+
+editingNoteIndex = null;
+
+saveNoteBtn.textContent =
+"Save Note";
+
+}else{
+
+notes.push(note);
+
+}
+
+localStorage.setItem(
+"notes",
+JSON.stringify(notes)
+);
+
+renderNotes();
+
+document.getElementById("noteTitle").value = "";
+document.getElementById("noteUniversity").value = "";
+document.getElementById("noteContent").value = "";
+
+noteForm.classList.add("hidden");
+
+});
+
+/* -------------------
+INITIAL LOAD
+------------------- */
+
+renderNotes();
+
+</script>
+
+</body>
+
+</html>
+```

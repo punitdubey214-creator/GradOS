@@ -1,0 +1,343 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GradOS - Referees</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+GradOS
+</div>
+
+<div class="nav-buttons">
+<a href="dashboard.html" class="btn-secondary">
+Dashboard
+</a>
+</div>
+
+</nav>
+
+<div class="page-container">
+
+<div class="page-header">
+
+<div>
+<h1>Referee Manager</h1>
+<p>Track recommendation letters.</p>
+</div>
+
+<button id="addRefereeBtn" class="btn-primary">
++ Add Referee
+</button>
+
+</div>
+
+<div id="refereeForm" class="app-form hidden">
+
+<input
+type="text"
+id="refName"
+placeholder="Referee Name">
+
+<input
+type="text"
+id="refInstitution"
+placeholder="Institution">
+
+<input
+type="email"
+id="refEmail"
+placeholder="Email">
+
+<input
+type="text"
+id="refUniversity"
+placeholder="University">
+
+<input
+type="date"
+id="refDeadline">
+
+<select id="refStatus">
+
+<option>Requested</option>
+<option>Agreed</option>
+<option>Submitted</option>
+<option>Declined</option>
+
+</select>
+
+<button id="saveRefereeBtn" class="btn-primary">
+Save
+</button>
+
+</div>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Institution</th>
+<th>Email</th>
+<th>University</th>
+<th>Deadline</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody id="refereeTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const addRefereeBtn =
+document.getElementById("addRefereeBtn");
+
+const refereeForm =
+document.getElementById("refereeForm");
+
+const saveRefereeBtn =
+document.getElementById("saveRefereeBtn");
+
+const refereeTable =
+document.getElementById("refereeTable");
+
+let referees =
+JSON.parse(localStorage.getItem("referees")) || [];
+
+let editingRefereeIndex = null;
+
+/* --------------------
+SHOW FORM
+-------------------- */
+
+addRefereeBtn.addEventListener("click",()=>{
+
+refereeForm.classList.toggle("hidden");
+
+});
+
+/* --------------------
+STATUS BADGE
+-------------------- */
+
+function refereeBadge(status){
+
+if(status === "Submitted"){
+return '<span class="status positive">Submitted</span>';
+}
+
+if(status === "Declined"){
+return '<span class="status negative">Declined</span>';
+}
+
+if(status === "Agreed"){
+return '<span class="status waiting">Agreed</span>';
+}
+
+return '<span class="status followup">Requested</span>';
+
+}
+
+/* --------------------
+EDIT
+-------------------- */
+
+function editReferee(index){
+
+const ref = referees[index];
+
+document.getElementById("refName").value =
+ref.name;
+
+document.getElementById("refInstitution").value =
+ref.institution;
+
+document.getElementById("refEmail").value =
+ref.email;
+
+document.getElementById("refUniversity").value =
+ref.university;
+
+document.getElementById("refDeadline").value =
+ref.deadline;
+
+document.getElementById("refStatus").value =
+ref.status;
+
+editingRefereeIndex = index;
+
+saveRefereeBtn.textContent = "Update";
+
+refereeForm.classList.remove("hidden");
+
+}
+
+/* --------------------
+DELETE
+-------------------- */
+
+function deleteReferee(index){
+
+if(confirm("Delete referee?")){
+
+referees.splice(index,1);
+
+localStorage.setItem(
+"referees",
+JSON.stringify(referees)
+);
+
+renderReferees();
+
+}
+
+}
+
+/* --------------------
+RENDER
+-------------------- */
+
+function renderReferees(){
+
+refereeTable.innerHTML = "";
+
+referees.forEach((ref,index)=>{
+
+refereeTable.innerHTML += `
+
+<tr>
+
+<td>${ref.name}</td>
+
+<td>${ref.institution}</td>
+
+<td>${ref.email}</td>
+
+<td>${ref.university}</td>
+
+<td>${ref.deadline}</td>
+
+<td>${refereeBadge(ref.status)}</td>
+
+<td>
+
+<button
+onclick="editReferee(${index})"
+class="btn-secondary">
+Edit
+</button>
+
+<button
+onclick="deleteReferee(${index})"
+class="delete-btn">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+/* --------------------
+SAVE / UPDATE
+-------------------- */
+
+saveRefereeBtn.addEventListener("click",()=>{
+
+const referee = {
+
+name:
+document.getElementById("refName").value,
+
+institution:
+document.getElementById("refInstitution").value,
+
+email:
+document.getElementById("refEmail").value,
+
+university:
+document.getElementById("refUniversity").value,
+
+deadline:
+document.getElementById("refDeadline").value,
+
+status:
+document.getElementById("refStatus").value
+
+};
+
+if(editingRefereeIndex !== null){
+
+referees[editingRefereeIndex] =
+referee;
+
+editingRefereeIndex = null;
+
+saveRefereeBtn.textContent =
+"Save";
+
+}else{
+
+referees.push(referee);
+
+}
+
+localStorage.setItem(
+"referees",
+JSON.stringify(referees)
+);
+
+renderReferees();
+
+document.getElementById("refName").value = "";
+document.getElementById("refInstitution").value = "";
+document.getElementById("refEmail").value = "";
+document.getElementById("refUniversity").value = "";
+document.getElementById("refDeadline").value = "";
+
+refereeForm.classList.add("hidden");
+
+});
+
+/* --------------------
+INITIAL LOAD
+-------------------- */
+
+renderReferees();
+
+</script>
+
+</body>
+</html>
+```

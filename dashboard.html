@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GradOS Dashboard</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+GradOS
+</div>
+
+</nav>
+
+<div class="dashboard">
+
+<h1 id="welcomeMessage">
+Welcome Back
+</h1>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<h2 id="applicationsCount">0</h2>
+<p>Applications</p>
+</div>
+
+<div class="stat-card">
+<h2 id="professorsCount">0</h2>
+<p>Professors Contacted</p>
+</div>
+
+<div class="stat-card">
+<h2 id="refereesCount">0</h2>
+<p>Referees</p>
+</div>
+
+<div class="stat-card">
+<h2 id="deadlinesCount">0</h2>
+<p>Upcoming Deadlines</p>
+</div>
+
+</div>
+
+<div class="module-grid">
+
+<a href="applications.html" class="module-card">
+<h3>Applications</h3>
+<p>Track all applications.</p>
+</a>
+
+<a href="professors.html" class="module-card">
+<h3>Professors</h3>
+<p>Manage cold emails.</p>
+</a>
+
+<a href="referees.html" class="module-card">
+<h3>Referees</h3>
+<p>Track recommendation letters.</p>
+</a>
+
+<a href="notes.html" class="module-card">
+<h3>Notes</h3>
+<p>Store SOP ideas.</p>
+</a>
+
+<a href="deadlines.html" class="module-card">
+<h3>Deadlines</h3>
+<p>Upcoming tasks and reminders.</p>
+</a>
+
+<a href="finder.html" class="module-card">
+<h3>Application Finder</h3>
+<p>Search PhD, Postdoc and Academic Positions.</p>
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+const applications =
+JSON.parse(localStorage.getItem("applications")) || [];
+
+const professors =
+JSON.parse(localStorage.getItem("professors")) || [];
+
+const referees =
+JSON.parse(localStorage.getItem("referees")) || [];
+
+document.getElementById("applicationsCount").textContent =
+applications.length;
+
+document.getElementById("professorsCount").textContent =
+professors.length;
+
+document.getElementById("refereesCount").textContent =
+referees.length;
+
+const today = new Date();
+
+let upcoming = 0;
+
+applications.forEach(app => {
+
+if(!app.deadline) return;
+
+const deadline = new Date(app.deadline);
+
+const diff =
+(deadline - today) /
+(1000 * 60 * 60 * 24);
+
+if(diff >= 0 && diff <= 30){
+
+upcoming++;
+
+}
+
+});
+
+document.getElementById("deadlinesCount").textContent =
+upcoming;
+
+const userName =
+localStorage.getItem(
+"userName"
+);
+
+const userEmail =
+localStorage.getItem(
+"userEmail"
+);
+
+if(userName){
+
+document.getElementById(
+"welcomeMessage"
+).textContent =
+`Welcome Back, ${userName}`;
+
+}
+
+if(userEmail){
+
+document.getElementById(
+"userEmailDisplay"
+).textContent =
+userEmail;
+
+}
+
+</script>
+
+</body>
+
+</html>

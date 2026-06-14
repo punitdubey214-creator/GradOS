@@ -1,0 +1,340 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GradOS - Professors</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+GradOS
+</div>
+
+<div class="nav-buttons">
+<a href="dashboard.html" class="btn-secondary">
+Dashboard
+</a>
+</div>
+
+</nav>
+
+<div class="page-container">
+
+<div class="page-header">
+
+<div>
+<h1>Professor Tracker</h1>
+<p>Track cold emails and follow-ups.</p>
+</div>
+
+<button id="addProfessorBtn" class="btn-primary">
++ Add Professor
+</button>
+
+</div>
+
+<div id="professorForm" class="app-form hidden">
+
+<input
+type="text"
+id="profName"
+placeholder="Professor Name">
+
+<input
+type="text"
+id="profUniversity"
+placeholder="University">
+
+<input
+type="email"
+id="profEmail"
+placeholder="Email">
+
+<input
+type="date"
+id="dateSent">
+
+<input
+type="date"
+id="followUpDate">
+
+<select id="replyStatus">
+
+<option>Waiting</option>
+<option>Positive Reply</option>
+<option>Negative Reply</option>
+<option>Follow Up Needed</option>
+
+</select>
+
+<button id="saveProfessorBtn" class="btn-primary">
+Save
+</button>
+
+</div>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Professor</th>
+<th>University</th>
+<th>Email</th>
+<th>Date Sent</th>
+<th>Follow Up</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody id="professorTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const addProfessorBtn =
+document.getElementById("addProfessorBtn");
+
+const professorForm =
+document.getElementById("professorForm");
+
+const saveProfessorBtn =
+document.getElementById("saveProfessorBtn");
+
+const professorTable =
+document.getElementById("professorTable");
+
+let professors =
+JSON.parse(localStorage.getItem("professors")) || [];
+
+let editingProfessorIndex = null;
+
+/* -------------------------
+   SHOW FORM
+------------------------- */
+
+addProfessorBtn.addEventListener("click", () => {
+
+professorForm.classList.toggle("hidden");
+
+});
+
+/* -------------------------
+   STATUS BADGES
+------------------------- */
+
+function getStatusBadge(status){
+
+if(status === "Positive Reply"){
+return '<span class="status positive">Positive</span>';
+}
+
+if(status === "Negative Reply"){
+return '<span class="status negative">Negative</span>';
+}
+
+if(status === "Follow Up Needed"){
+return '<span class="status followup">Follow Up</span>';
+}
+
+return '<span class="status waiting">Waiting</span>';
+
+}
+
+/* -------------------------
+   EDIT
+------------------------- */
+
+function editProfessor(index){
+
+const prof = professors[index];
+
+document.getElementById("profName").value =
+prof.name;
+
+document.getElementById("profUniversity").value =
+prof.university;
+
+document.getElementById("profEmail").value =
+prof.email;
+
+document.getElementById("dateSent").value =
+prof.dateSent;
+
+document.getElementById("followUpDate").value =
+prof.followUp;
+
+document.getElementById("replyStatus").value =
+prof.status;
+
+editingProfessorIndex = index;
+
+saveProfessorBtn.textContent = "Update";
+
+professorForm.classList.remove("hidden");
+
+}
+
+/* -------------------------
+   DELETE
+------------------------- */
+
+function deleteProfessor(index){
+
+if(confirm("Delete professor?")){
+
+professors.splice(index,1);
+
+localStorage.setItem(
+"professors",
+JSON.stringify(professors)
+);
+
+renderProfessors();
+
+}
+
+}
+
+/* -------------------------
+   RENDER TABLE
+------------------------- */
+
+function renderProfessors(){
+
+professorTable.innerHTML = "";
+
+professors.forEach((prof,index)=>{
+
+professorTable.innerHTML += `
+
+<tr>
+
+<td>${prof.name}</td>
+
+<td>${prof.university}</td>
+
+<td>${prof.email}</td>
+
+<td>${prof.dateSent}</td>
+
+<td>${prof.followUp}</td>
+
+<td>${getStatusBadge(prof.status)}</td>
+
+<td>
+
+<button
+onclick="editProfessor(${index})"
+class="btn-secondary">
+Edit
+</button>
+
+<button
+onclick="deleteProfessor(${index})"
+class="delete-btn">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+/* -------------------------
+   SAVE / UPDATE
+------------------------- */
+
+saveProfessorBtn.addEventListener("click", () => {
+
+const professor = {
+
+name:
+document.getElementById("profName").value,
+
+university:
+document.getElementById("profUniversity").value,
+
+email:
+document.getElementById("profEmail").value,
+
+dateSent:
+document.getElementById("dateSent").value,
+
+followUp:
+document.getElementById("followUpDate").value,
+
+status:
+document.getElementById("replyStatus").value
+
+};
+
+if(editingProfessorIndex !== null){
+
+professors[editingProfessorIndex] =
+professor;
+
+editingProfessorIndex = null;
+
+saveProfessorBtn.textContent =
+"Save";
+
+}else{
+
+professors.push(professor);
+
+}
+
+localStorage.setItem(
+"professors",
+JSON.stringify(professors)
+);
+
+renderProfessors();
+
+document.getElementById("profName").value = "";
+document.getElementById("profUniversity").value = "";
+document.getElementById("profEmail").value = "";
+document.getElementById("dateSent").value = "";
+document.getElementById("followUpDate").value = "";
+
+professorForm.classList.add("hidden");
+
+});
+
+/* -------------------------
+   INITIAL LOAD
+------------------------- */
+
+renderProfessors();
+
+</script>
+
+</body>
+</html>
+```

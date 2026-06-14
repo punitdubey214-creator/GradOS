@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GradOS - Deadlines</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+GradOS
+</div>
+
+<div class="nav-buttons">
+
+<a href="dashboard.html" class="btn-secondary">
+Dashboard
+</a>
+
+</div>
+
+</nav>
+
+<div class="page-container">
+
+<div class="page-header">
+
+<div>
+
+<h1>Deadline Center</h1>
+
+<p>
+Track all application deadlines, referee deadlines, and professor follow-ups in one place.
+</p>
+
+</div>
+
+<button
+id="enableNotificationsBtn"
+class="btn-primary">
+
+Enable Notifications
+
+</button>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<h2 id="totalDeadlines">0</h2>
+<p>Total Deadlines</p>
+</div>
+
+<div class="stat-card">
+<h2 id="overdueCount">0</h2>
+<p>Overdue</p>
+</div>
+
+<div class="stat-card">
+<h2 id="weekCount">0</h2>
+<p>Next 7 Days</p>
+</div>
+
+<div class="stat-card">
+<h2 id="monthCount">0</h2>
+<p>Next 30 Days</p>
+</div>
+
+</div>
+
+<!-- DEADLINES LIST -->
+
+<div
+id="deadlineContainer"
+class="deadlines-grid">
+
+</div>
+
+</div>
+
+<script src="deadlines.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Welcome to GradOS</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="welcome-container">
+
+<div class="welcome-card">
+
+<h1>Welcome to GradOS</h1>
+
+<p>
+Let's personalize your workspace.
+</p>
+
+<input
+type="text"
+id="userName"
+placeholder="Your Name">
+
+<input
+type="email"
+id="userEmail"
+placeholder="Your Email">
+
+<button
+id="continueBtn"
+class="btn-primary">
+
+Continue
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const continueBtn =
+document.getElementById(
+"continueBtn"
+);
+
+continueBtn.addEventListener(
+"click",
+()=>{
+
+const name =
+document.getElementById(
+"userName"
+).value;
+
+const email =
+document.getElementById(
+"userEmail"
+).value;
+
+if(!name || !email){
+
+alert(
+"Please enter your name and email."
+);
+
+return;
+
+}
+
+localStorage.setItem(
+"userName",
+name
+);
+
+localStorage.setItem(
+"userEmail",
+email
+);
+
+window.location.href =
+"dashboard.html";
+
+}
+);
+
+</script>
+
+</body>
+
+</html>
+```
