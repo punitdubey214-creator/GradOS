@@ -1001,3 +1001,55 @@ margin-bottom:5px;
 .search-result p{
 color:#c7d0e4;
 }
+/* ==========================
+   SEARCH SECTION
+========================== */
+
+.search-section{
+display:flex;
+gap:12px;
+margin-bottom:25px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+#globalSearch{
+flex:1;
+padding:14px 18px;
+border:none;
+border-radius:12px;
+background:#141b34;
+color:white;
+font-size:1rem;
+outline:none;
+}
+
+#globalSearch:focus{
+box-shadow:0 0 0 2px #4f8cff;
+}
+
+#searchBtn{
+padding:14px 24px;
+border:none;
+border-radius:12px;
+background:linear-gradient(
+135deg,
+#4f8cff,
+#6ca7ff
+);
+color:white;
+font-weight:600;
+font-size:1rem;
+cursor:pointer;
+transition:0.3s;
+}
+
+#searchBtn:hover{
+transform:translateY(-2px);
+box-shadow:
+0 8px 20px rgba(79,140,255,0.35);
+}
+
+#searchBtn:active{
+transform:scale(0.97);
+}
