@@ -1053,3 +1053,37 @@ box-shadow:
 #searchBtn:active{
 transform:scale(0.97);
 }
+/* ==========================
+   SETTINGS PAGE
+========================== */
+
+.settings-card{
+max-width:600px;
+margin:30px auto;
+background:#141b34;
+padding:30px;
+border-radius:16px;
+}
+
+.settings-card label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.settings-card input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#0d1428;
+color:white;
+font-size:1rem;
+margin-bottom:10px;
+}
+
+.settings-card button{
+margin-top:15px;
+width:100%;
+}
