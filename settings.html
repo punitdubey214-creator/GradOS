@@ -72,6 +72,14 @@ Save Changes
 
 </button>
 
+<button
+id="exportBtn"
+class="btn-secondary">
+
+Export Backup
+
+</button>
+
 </div>
 
 </div>
@@ -118,6 +126,98 @@ emailInput.value
 
 alert(
 "Settings Saved Successfully!"
+);
+
+});
+/* =====================
+   EXPORT BACKUP
+===================== */
+
+document
+.getElementById(
+"exportBtn"
+)
+.addEventListener(
+"click",
+()=>{
+
+const backup = {
+
+userName:
+localStorage.getItem(
+"userName"
+),
+
+userEmail:
+localStorage.getItem(
+"userEmail"
+),
+
+applications:
+JSON.parse(
+localStorage.getItem(
+"applications"
+)
+) || [],
+
+professors:
+JSON.parse(
+localStorage.getItem(
+"professors"
+)
+) || [],
+
+referees:
+JSON.parse(
+localStorage.getItem(
+"referees"
+)
+) || [],
+
+notes:
+JSON.parse(
+localStorage.getItem(
+"notes"
+)
+) || []
+
+};
+
+const data =
+JSON.stringify(
+backup,
+null,
+2
+);
+
+const blob =
+new Blob(
+[data],
+{
+type:
+"application/json"
+}
+);
+
+const url =
+URL.createObjectURL(
+blob
+);
+
+const a =
+document.createElement(
+"a"
+);
+
+a.href = url;
+
+a.download =
+"grados_backup.json";
+
+a.click();
+
+URL.revokeObjectURL(
+url
 );
 
 });
