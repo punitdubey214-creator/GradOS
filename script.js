@@ -136,6 +136,24 @@ app.deadline;
 
 document.getElementById("status").value =
 app.status;
+document.getElementById("feeRequired").value =
+app.feeRequired || "No";
+
+document.getElementById("feeAmount").value =
+app.feeAmount || "";
+
+document.getElementById("feeCurrency").value =
+app.feeCurrency || "EUR";
+
+if(app.feeRequired === "Yes"){
+
+feeSection.style.display = "block";
+
+}else{
+
+feeSection.style.display = "none";
+
+}
 
 document.getElementById("cv").value =
 app.cv;
@@ -314,6 +332,15 @@ class="details-section">
 saveBtn.addEventListener("click",()=>{
 
 const application = {
+   
+feeRequired:
+document.getElementById("feeRequired").value,
+
+feeAmount:
+document.getElementById("feeAmount").value,
+
+feeCurrency:
+document.getElementById("feeCurrency").value,
 
 university:
 document.getElementById("university").value,
