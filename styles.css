@@ -1092,3 +1092,35 @@ margin-top:8px;
 font-weight:600;
 color:#4f8cff;
 }
+
+/* =====================
+   QUOTE CARD
+===================== */
+
+.quote-card{
+
+background:#141b34;
+
+padding:20px;
+
+border-radius:16px;
+
+margin-bottom:25px;
+
+}
+
+.quote-card h3{
+
+margin-bottom:10px;
+
+}
+
+.quote-card p{
+
+font-size:1.05rem;
+
+line-height:1.6;
+
+color:#d5dff7;
+
+}
