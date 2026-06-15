@@ -142,99 +142,6 @@ placeholder="Search universities, professors, referees...">
 
 </div>
 
-/* =====================
-   APPLICATIONS BY MONTH
-===================== */
-
-const monthNames = [
-
-"Jan",
-"Feb",
-"Mar",
-"Apr",
-"May",
-"Jun",
-"Jul",
-"Aug",
-"Sep",
-"Oct",
-"Nov",
-"Dec"
-
-];
-
-const monthlyData =
-Array(12).fill(0);
-
-applications.forEach(app=>{
-
-if(!app.createdAt) return;
-
-const date =
-new Date(app.createdAt);
-
-monthlyData[
-date.getMonth()
-]++;
-
-});
-
-const ctx =
-document.getElementById(
-"applicationsChart"
-);
-
-new Chart(ctx, {
-
-type:"bar",
-
-data:{
-
-labels:monthNames,
-
-datasets:[{
-
-label:
-"Applications",
-
-data:
-monthlyData,
-
-borderWidth:1
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-plugins:{
-
-legend:{
-display:false
-}
-
-},
-
-scales:{
-
-y:{
-
-beginAtZero:true,
-
-ticks:{
-precision:0
-}
-
-}
-
-}
-
-}
-
-});
 
 <script>
 
@@ -634,6 +541,98 @@ document.getElementById(
 "motivationQuote"
 ).textContent =
 randomQuote;
+
+/* =====================
+   APPLICATIONS BY MONTH
+===================== */
+
+const monthNames = [
+
+"Jan",
+"Feb",
+"Mar",
+"Apr",
+"May",
+"Jun",
+"Jul",
+"Aug",
+"Sep",
+"Oct",
+"Nov",
+"Dec"
+
+];
+
+const monthlyData =
+Array(12).fill(0);
+
+applications.forEach(app=>{
+
+if(!app.createdAt) return;
+
+const date =
+new Date(app.createdAt);
+
+monthlyData[
+date.getMonth()
+]++;
+
+});
+
+const ctx =
+document.getElementById(
+"applicationsChart"
+);
+
+new Chart(ctx, {
+
+type:"bar",
+
+data:{
+
+labels:monthNames,
+
+datasets:[{
+
+label:"Applications",
+
+data:monthlyData,
+
+borderWidth:1
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+display:false
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+ticks:{
+precision:0
+}
+
+}
+
+}
+
+}
+
+});
    
 </script>
 
