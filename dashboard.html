@@ -2,12 +2,14 @@
 <html lang="en">
 
 <head>
+   
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>GradOS Dashboard</title>
 
 <link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -90,7 +92,16 @@ placeholder="Search universities, professors, referees...">
 </div>
 
 </div>
+<div class="chart-card">
 
+<h3>
+📊 Applications by Month
+</h3>
+
+<canvas id="applicationsChart"></canvas>
+
+</div>
+   
 <div class="module-grid">
 
 <a href="applications.html" class="module-card">
