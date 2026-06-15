@@ -1149,3 +1149,20 @@ margin-bottom:20px;
 max-height:350px;
 
 }
+.logo-container{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.dashboard-logo{
+width:42px;
+height:42px;
+object-fit:contain;
+}
+
+.logo-text{
+font-size:1.8rem;
+font-weight:700;
+color:#4f8cff;
+}
