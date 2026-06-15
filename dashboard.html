@@ -568,69 +568,14 @@ Array(12).fill(0);
 
 applications.forEach(app=>{
 
-if(!app.createdAt) return;
+if(!app.deadline) return;
 
 const date =
-new Date(app.createdAt);
+new Date(app.deadline);
 
 monthlyData[
 date.getMonth()
 ]++;
-
-});
-
-const ctx =
-document.getElementById(
-"applicationsChart"
-);
-
-new Chart(ctx, {
-
-type:"bar",
-
-data:{
-
-labels:monthNames,
-
-datasets:[{
-
-label:"Applications",
-
-data:monthlyData,
-
-borderWidth:1
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-plugins:{
-
-legend:{
-display:false
-}
-
-},
-
-scales:{
-
-y:{
-
-beginAtZero:true,
-
-ticks:{
-precision:0
-}
-
-}
-
-}
-
-}
 
 });
    
