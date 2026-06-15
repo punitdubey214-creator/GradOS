@@ -25,6 +25,18 @@ GradOS
 
 <div class="dashboard">
 
+<div class="quote-card">
+
+<h3>
+💡 Today's Motivation
+</h3>
+
+<p id="motivationQuote">
+Loading...
+</p>
+
+</div>
+   
 <h1 id="welcomeMessage">
 Welcome Back
 </h1>
@@ -46,6 +58,11 @@ placeholder="Search universities, professors, referees...">
 </div>
    
 <div class="stats-grid">
+
+<div class="stat-card">
+<h2 id="totalFees">0</h2>
+<p>Total Fees</p>
+</div>
 
 <div class="stat-card">
 <h2 id="monthlyApplications">0</h2>
@@ -426,6 +443,73 @@ document.getElementById(
 "monthlyApplications"
 ).textContent =
 monthlyCount;
+/* =====================
+   TOTAL FEES
+===================== */
+
+let feeSummary = "";
+
+applications.forEach(app=>{
+
+if(
+app.feeRequired === "Yes" &&
+app.feeAmount
+){
+
+feeSummary +=
+`${app.feeCurrency} ${app.feeAmount}<br>`;
+
+}
+
+});
+
+document.getElementById(
+"totalFees"
+).innerHTML =
+feeSummary || "0";
+
+/* =====================
+   MOTIVATIONAL QUOTES
+===================== */
+
+const quotes = [
+
+"One application can change your future.",
+
+"Done is better than perfect.",
+
+"Every application increases your chances.",
+
+"Consistency beats motivation.",
+
+"The opportunity you want may be one email away.",
+
+"Apply first. Doubt later.",
+
+"Your future advisor has not met you yet.",
+
+"Small progress every day adds up.",
+
+"The best PhD application is the submitted one.",
+
+"You miss every opportunity you never apply for."
+
+];
+
+const randomQuote =
+
+quotes[
+Math.floor(
+Math.random() *
+quotes.length
+)
+];
+
+document.getElementById(
+"motivationQuote"
+).textContent =
+randomQuote;
+   
 </script>
 
 </body>
