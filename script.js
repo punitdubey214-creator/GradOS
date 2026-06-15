@@ -353,6 +353,10 @@ ${app.feeRequired === "Yes"
 saveBtn.addEventListener("click",()=>{
 
 const application = {
+createdAt:
+editingIndex !== null
+? applications[editingIndex].createdAt
+: new Date().toISOString(),
    
 feeRequired:
 document.getElementById("feeRequired").value,
