@@ -353,6 +353,7 @@ ${app.feeRequired === "Yes"
 saveBtn.addEventListener("click",()=>{
 
 const application = {
+   
 createdAt:
 editingIndex !== null
 ? applications[editingIndex].createdAt
