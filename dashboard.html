@@ -447,7 +447,11 @@ monthlyCount;
    TOTAL FEES
 ===================== */
 
-let feeSummary = "";
+/* =====================
+   TOTAL FEES
+===================== */
+
+const totals = {};
 
 applications.forEach(app=>{
 
@@ -456,12 +460,110 @@ app.feeRequired === "Yes" &&
 app.feeAmount
 ){
 
-feeSummary +=
-`${app.feeCurrency} ${app.feeAmount}<br>`;
+const currency =
+app.feeCurrency;
+
+const amount =
+Number(app.feeAmount);
+
+totals[currency] =
+(totals[currency] || 0)
++ amount;
 
 }
 
 });
+
+/* =====================
+   TOTAL FEES
+===================== */
+
+const totals = {};
+
+applications.forEach(app=>{
+
+if(
+app.feeRequired === "Yes" &&
+app.feeAmount
+){
+
+const currency =
+app.feeCurrency;
+
+const amount =
+Number(app.feeAmount);
+
+totals[currency] =
+(totals[currency] || 0)
++ amount;
+
+}
+
+});
+/* =====================
+   TOTAL FEES
+===================== */
+
+const totals = {};
+
+applications.forEach(app=>{
+
+if(
+app.feeRequired === "Yes" &&
+app.feeAmount
+){
+
+const currency =
+app.feeCurrency;
+
+const amount =
+Number(app.feeAmount);
+
+totals[currency] =
+(totals[currency] || 0)
++ amount;
+
+}
+
+});
+
+/* =====================
+   TOTAL FEES
+===================== */
+
+const totals = {};
+
+applications.forEach(app=>{
+
+if(
+app.feeRequired === "Yes" &&
+app.feeAmount
+){
+
+const currency =
+app.feeCurrency;
+
+const amount =
+Number(app.feeAmount);
+
+totals[currency] =
+(totals[currency] || 0)
++ amount;
+
+}
+
+});
+
+let feeSummary = "";
+
+for(
+const currency in totals
+){
+
+feeSummary +=
+`${currency} ${totals[currency]}<br>`;
+
+}
 
 document.getElementById(
 "totalFees"
