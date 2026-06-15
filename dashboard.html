@@ -48,6 +48,11 @@ placeholder="Search universities, professors, referees...">
 <div class="stats-grid">
 
 <div class="stat-card">
+<h2 id="monthlyApplications">0</h2>
+<p>Applications This Month</p>
+</div>
+   
+<div class="stat-card">
 <h2 id="applicationsCount">0</h2>
 <p>Applications</p>
 </div>
@@ -391,6 +396,36 @@ class="search-result">
 });
 
 }
+const currentMonth =
+new Date().getMonth();
+
+const currentYear =
+new Date().getFullYear();
+
+let monthlyCount = 0;
+
+applications.forEach(app=>{
+
+if(!app.createdAt) return;
+
+const date =
+new Date(app.createdAt);
+
+if(
+date.getMonth() === currentMonth &&
+date.getFullYear() === currentYear
+){
+
+monthlyCount++;
+
+}
+
+});
+
+document.getElementById(
+"monthlyApplications"
+).textContent =
+monthlyCount;
 </script>
 
 </body>
