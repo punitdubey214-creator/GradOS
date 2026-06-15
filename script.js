@@ -380,3 +380,41 @@ formContainer.classList.add("hidden");
 });
 
 renderApplications();
+/* ======================
+   APPLICATION FEES
+====================== */
+
+const feeRequired =
+document.getElementById(
+"feeRequired"
+);
+
+const feeSection =
+document.getElementById(
+"feeSection"
+);
+
+if(feeRequired){
+
+feeRequired.addEventListener(
+"change",
+()=>{
+
+if(
+feeRequired.value === "Yes"
+){
+
+feeSection.style.display =
+"block";
+
+}
+else{
+
+feeSection.style.display =
+"none";
+
+}
+
+});
+
+}
