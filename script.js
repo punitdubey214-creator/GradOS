@@ -227,7 +227,15 @@ ${app.status}
 </div>
 
 <p class="deadline">
-Deadline: ${app.deadline}
+📅 Deadline: ${app.deadline}
+</p>
+
+<p class="fee-display">
+
+${app.feeRequired === "Yes"
+? `💰 Fee: ${app.feeCurrency} ${app.feeAmount}`
+: "💰 No Application Fee"}
+
 </p>
 
 <div class="progress-bar">
@@ -274,6 +282,19 @@ Delete
 <div
 id="details-${index}"
 class="details-section">
+
+<div class="detail-row">
+<span>Application Fee</span>
+
+<span>
+
+${app.feeRequired === "Yes"
+? `${app.feeCurrency} ${app.feeAmount}`
+: "Free"}
+
+</span>
+
+</div>
 
 <div class="detail-row">
 <span>CV</span>
